@@ -1,0 +1,34 @@
+.Window {
+  position: absolute;
+  background: white;
+  width: 300px;
+  box-shadow: 0 1px 3px -1px rgba(0, 0, 0, 0.8);
+  border-radius: 5px;
+  padding: 15px;
+  overflow: hidden;
+}
+
+.dragger {
+  margin-top: -15px;
+  padding: 15px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dragger > div {
+  margin: auto;
+  width: 100%;
+  height: 6px;
+  border-radius: 4px;
+  background: rgba(225, 225, 225, 1);
+  box-shadow: inset 0 1px 0 1px rgba(0, 0, 0, 0.2);
+}
+
+.dragger:hover {
+  cursor: grab;
+}
+
+.dragger:active {
+  cursor: grabbing;
+}

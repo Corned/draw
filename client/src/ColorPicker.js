@@ -1,20 +1,18 @@
 import React, { useState } from "react"
-import Draggable from "react-draggable"
+import posed from "react-pose"
 
 import colors from "./constants/Colors"
 import "./ColorPicker.css"
 
+import Window from "./Window"
+
+
 const ColorPicker = () => {
   return (
-    <Draggable handle=".dragger">
-      <div className="ColorPicker">
-        <div className="dragger">
-          <div/>
-        </div>
-        <h1>Picker of Colors</h1>
-        <ColorOptions/>
-      </div>
-    </Draggable>
+    <Window>
+      <h1>Picker of Colors</h1>
+      <ColorOptions/>
+    </Window>
   )
 }
 
