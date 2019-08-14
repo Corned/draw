@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import posed from "react-pose"
 
-import colors from "./constants/Colors"
+import colors from "../constants/Colors"
 import "./ColorPicker.css"
 
 import Window from "./Window"
