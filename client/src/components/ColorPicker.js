@@ -1,15 +1,15 @@
 import React, { useState } from "react"
 import posed from "react-pose"
+import Window from "./Window"
 
 import colors from "../constants/Colors"
 import "./ColorPicker.css"
 
-import Window from "./Window"
 
 
 const ColorPicker = () => {
   return (
-    <Window>
+    <Window className="ColorPicker">
       <h1>Picker of Colors</h1>
       <ColorOptions/>
     </Window>

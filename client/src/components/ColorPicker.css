@@ -1,9 +1,8 @@
 .ColorPicker {
+  width: 300px;
 }
 
-
 .color-options {
-  margin-top: 5px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 6px;
