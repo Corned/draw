@@ -22,12 +22,17 @@ class Canvas extends React.Component {
     const draw = (event) => {
       const rect = canvas.getBoundingClientRect()
 
-      const x = (event.clientX - rect.left) / 2
-      const y = (event.clientY - rect.top) / 2
+      var { clientX, clientY } = event
+      if (!clientX && !clientY) {
+        var { clientX, clientY } = event.targetTouches[0]
+      }
+
+      const x = (clientX - rect.left) / 2
+      const y = (clientY - rect.top) / 2
 
       ctx.beginPath()
       ctx.strokeStyle = "black"
-      ctx.lineWidth = 4
+      ctx.lineWidth = 2
       ctx.lineJoin = "round"
       ctx.moveTo(this.state.lastPoint.x, this.state.lastPoint.y)
       ctx.lineTo(x, y)
@@ -67,6 +72,37 @@ class Canvas extends React.Component {
     }, false);
 
     canvas.addEventListener("mouseup", (event) => {
+      stopDrawing()
+      event.preventDefault()
+    }, false);
+
+
+
+    canvas.addEventListener("touchstart", (event) => {
+      const rect = canvas.getBoundingClientRect()
+
+      const { clientX, clientY } = event.targetTouches[0]
+
+      this.setState({ 
+        drawing: true,
+        lastPoint: { 
+          x: (clientX - rect.left) / 2, 
+          y: (clientY - rect.top) / 2,
+        },
+      })
+
+      draw(event)
+      event.preventDefault()
+    }, false);
+
+    canvas.addEventListener("touchmove", (event) => {
+      if (!this.state.drawing) return
+
+      draw(event)
+      event.preventDefault()
+    }, false);
+
+    canvas.addEventListener("touchend", (event) => {
       stopDrawing()
       event.preventDefault()
     }, false);

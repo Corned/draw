@@ -10,7 +10,7 @@ import "./ColorPicker.css"
 const ColorPicker = () => {
   return (
     <Window className="ColorPicker">
-      <h1>Picker of Colors</h1>
+      <h1>Colorpicker</h1>
       <ColorOptions/>
     </Window>
   )
@@ -18,7 +18,7 @@ const ColorPicker = () => {
 
 function ColorOptions() {
   return (
-    <div className="color-options">
+    <div className="ColorPicker color-options">
       { colors.map(hex => (
         <div className="color-option" style={{backgroundColor: hex}}/>
       ))}
