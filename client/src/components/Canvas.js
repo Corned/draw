@@ -20,92 +20,75 @@ class Canvas extends React.Component {
     const ctx = canvas.getContext("2d")
 
     const draw = (event) => {
-      const rect = canvas.getBoundingClientRect()
+      if (!this.state.drawing)
+        return
 
-      var { clientX, clientY } = event
-      if (!clientX && !clientY) {
-        var { clientX, clientY } = event.targetTouches[0]
-      }
+      // Get last position
+      const { x: lastX, y: lastY } = this.state.lastPoint
 
-      const x = (clientX - rect.left) / 2
-      const y = (clientY - rect.top) / 2
+      // Get current location of mouse/touch
+      const { x: toX, y: toY } = getPoint(event)
 
       ctx.beginPath()
       ctx.strokeStyle = "black"
       ctx.lineWidth = 2
       ctx.lineJoin = "round"
-      ctx.moveTo(this.state.lastPoint.x, this.state.lastPoint.y)
-      ctx.lineTo(x, y)
+      ctx.moveTo(lastX, lastY)
+      ctx.lineTo(toX, toY)
       ctx.closePath()
       ctx.stroke()
       
-      this.setState({ lastPoint: { x, y }})
+      this.setState({ 
+        lastPoint: { x: toX, y: toY }
+      })
     }
 
-    const stopDrawing = () => {
+    const getPoint = (event) => {
+      const { left, top } = canvas.getBoundingClientRect()
+
+      if (event.type.startsWith("mouse")) {
+        const { clientX: x, clientY: y } = event
+        return { 
+          x: (x - left) / 2, 
+          y: (y - top) / 2,
+        }
+      }
+
+      // Touch events
+      const { clientX: x, clientY: y } = event.targetTouches[0]
+      return { 
+        x: (x - left) / 2, 
+        y: (y - top) / 2,
+      }
+    }
+
+    const startDrawing = (event) => {
+      event.preventDefault()
+
+      this.setState({
+        drawing: true,
+        lastPoint: getPoint(event),
+      })
+
+      draw(event)
+    }
+
+    const stopDrawing = (event) => {
+      event.preventDefault()
+
       this.setState({ 
         drawing: false,
         lastPoint: { x: null, y: null },
       })
     }
 
-    canvas.addEventListener("mousedown", (event) => {
-      const rect = canvas.getBoundingClientRect()
+    canvas.addEventListener("mousedown", startDrawing, false)
+    canvas.addEventListener("mousemove", draw, false)
+    canvas.addEventListener("mouseup", stopDrawing, false)
 
-      this.setState({ 
-        drawing: true,
-        lastPoint: { 
-          x: (event.clientX - rect.left) / 2, 
-          y: (event.clientY - rect.top) / 2,
-        },
-      })
-
-      draw(event)
-      event.preventDefault()
-    }, false);
-
-    canvas.addEventListener("mousemove", (event) => {
-      if (!this.state.drawing) return
-
-      draw(event)
-      event.preventDefault()
-    }, false);
-
-    canvas.addEventListener("mouseup", (event) => {
-      stopDrawing()
-      event.preventDefault()
-    }, false);
-
-
-
-    canvas.addEventListener("touchstart", (event) => {
-      const rect = canvas.getBoundingClientRect()
-
-      const { clientX, clientY } = event.targetTouches[0]
-
-      this.setState({ 
-        drawing: true,
-        lastPoint: { 
-          x: (clientX - rect.left) / 2, 
-          y: (clientY - rect.top) / 2,
-        },
-      })
-
-      draw(event)
-      event.preventDefault()
-    }, false);
-
-    canvas.addEventListener("touchmove", (event) => {
-      if (!this.state.drawing) return
-
-      draw(event)
-      event.preventDefault()
-    }, false);
-
-    canvas.addEventListener("touchend", (event) => {
-      stopDrawing()
-      event.preventDefault()
-    }, false);
+    canvas.addEventListener("touchstart", startDrawing, false)
+    canvas.addEventListener("touchmove", draw, false)
+    canvas.addEventListener("touchend", stopDrawing, false)
   }
 
   render() {
