@@ -6,7 +6,6 @@
   "scripts": {
     "start": "bash ./util/prodmode.sh",
     "dev": "nodemon index.js",
-    "heroku-postbuild": "bash ./util/"
   },
   "author": "",
   "license": "ISC",
