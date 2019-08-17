@@ -1,5 +1,6 @@
 import React, { useRef, forwardRef, useEffect, useState } from "react"
 import Window from "./Window"
+import io from "socket.io-client"
 
 import "./Canvas.css"
 
@@ -19,27 +20,48 @@ class Canvas extends React.Component {
     const canvas = this.refs.canvas
     const ctx = canvas.getContext("2d")
 
+    const socket = io("/")
+
+    socket.on("draw", (data) => {
+      const { color, size, from, to } = data
+
+      ctx.beginPath()
+      ctx.strokeStyle = color
+      ctx.lineWidth = size
+      ctx.lineJoin = "round"
+      ctx.moveTo(from.x, from.y)
+      ctx.lineTo(to.x, to.y)
+      ctx.closePath()
+      ctx.stroke()
+    })
+
     const draw = (event) => {
       if (!this.state.drawing)
         return
 
-      // Get last position
-      const { x: lastX, y: lastY } = this.state.lastPoint
-
-      // Get current location of mouse/touch
-      const { x: toX, y: toY } = getPoint(event)
+      const color = "black"
+      const size = 2
+      const from = this.state.lastPoint
+      const to = getPoint(event)
 
       ctx.beginPath()
-      ctx.strokeStyle = "black"
-      ctx.lineWidth = 2
+      ctx.strokeStyle = color
+      ctx.lineWidth = size
       ctx.lineJoin = "round"
-      ctx.moveTo(lastX, lastY)
-      ctx.lineTo(toX, toY)
+      ctx.moveTo(from.x, from.y)
+      ctx.lineTo(to.x, to.y)
       ctx.closePath()
       ctx.stroke()
+
+      socket.emit("draw", {
+        from,
+        to,
+        size: 2,
+        color: "black",
+      })
       
       this.setState({ 
-        lastPoint: { x: toX, y: toY }
+        lastPoint: to
       })
     }
 
