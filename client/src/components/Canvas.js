@@ -71,16 +71,16 @@ class Canvas extends React.Component {
       if (event.type.startsWith("mouse")) {
         const { clientX: x, clientY: y } = event
         return { 
-          x: (x - left) / 2, 
-          y: (y - top) / 2,
+          x: (x - left), 
+          y: (y - top),
         }
       }
 
       // Touch events
       const { clientX: x, clientY: y } = event.targetTouches[0]
       return { 
-        x: (x - left) / 2, 
-        y: (y - top) / 2,
+        x: (x - left), 
+        y: (y - top),
       }
     }
 
@@ -116,8 +116,11 @@ class Canvas extends React.Component {
   render() {
     return (
       <Window className="Canvas">
-        <h1>Canvas</h1>
-        <canvas ref="canvas"/>
+        <canvas 
+          width="600"
+          height="400"
+          ref="canvas"
+        />
       </Window>
     )
   }
