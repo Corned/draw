@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "bash ./util/prodmode.sh",
-    "dev": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "heroku-postbuild": "bash ./util/buildReactApp.sh"
   },
   "author": "",
   "license": "ISC",
