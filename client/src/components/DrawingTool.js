@@ -7,10 +7,8 @@ import Toolbar from "./Toolbar"
 import "./DrawingTool.css"
 
 const DrawingTool = () => {
-  const [ size, setSize ] = useState(2)
+  const [ size, setSize ] = useState(5)
   const [ color, setColor ] = useState("#000000")
-
-  console.log("YEET")
 
   return (
     <div className="DrawingTool">
