@@ -1,18 +1,9 @@
 .ColorPicker {
-  width: 250px;
-}
-
-.color-options {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 5px;
-}
-
-.color-options .color-option::before {
-  content: "";
-  padding-bottom: 100%;
-  display: inline-block;
-  vertical-align: top;
+  width: 720px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .color-option {
@@ -20,7 +11,11 @@
   flex-direction: column;
   justify-content: center;
   position: relative;
-  border-radius: 10%;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  margin: 0 3px;
+  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.2);
 }
 
 .color-option > div {

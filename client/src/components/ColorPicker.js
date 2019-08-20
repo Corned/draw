@@ -1,7 +1,5 @@
-import React, { useState } from "react"
+import React from "react"
 import posed from "react-pose"
-import classnames from "classnames"
-import Window from "./Window"
 
 import colors from "../constants/Colors"
 import "./ColorPicker.css"
@@ -33,33 +31,23 @@ const SelectionIndicator = posed.div({
   }
 })
 
-const ColorPicker = () => {
+const ColorPicker = ({ color, setColor }) => {
   return (
-    <Window className="ColorPicker">
-      <h1>Colorpicker</h1>
-      <ColorOptions/>
-    </Window>
-  )
-}
-
-function ColorOptions() {
-  const [ selected, setSelected ] = useState(null)
-
-  return (
-    <div className="color-options">
+    <div className="ColorPicker">
       { colors.map(hex => {
         
         return (
           <PickColor 
             className="color-option" 
             style={{backgroundColor: hex}}
-            onClick={() => setSelected(hex)}
+            onClick={() => setColor(hex)}
           >
             <SelectionIndicator
-              pose={selected===hex?"selected":"init"}
+              pose={ color === hex ? "selected" : "init" }
             />
           </PickColor>
         )
+
       })}
     </div>
   )

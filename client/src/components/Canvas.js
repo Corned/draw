@@ -1,5 +1,4 @@
 import React, { useRef, forwardRef, useEffect, useState } from "react"
-import Window from "./Window"
 import io from "socket.io-client"
 
 import "./Canvas.css"
@@ -9,8 +8,6 @@ class Canvas extends React.Component {
     super(props)
 
     this.state = {
-      color: "black",
-      size: 4,
       drawing: false,
       lastPoint: { x: null, y: null },
     }
@@ -39,9 +36,9 @@ class Canvas extends React.Component {
       if (!this.state.drawing)
         return
 
-      const color = "black"
-      const size = 2
-      const from = this.state.lastPoint
+
+      const { lastPoint: from } = this.state
+      const { color, size } = this.props
       const to = getPoint(event)
 
       ctx.beginPath()
@@ -56,8 +53,8 @@ class Canvas extends React.Component {
       socket.emit("draw", {
         from,
         to,
-        size: 2,
-        color: "black",
+        size,
+        color,
       })
       
       this.setState({ 
@@ -107,21 +104,21 @@ class Canvas extends React.Component {
     canvas.addEventListener("mousedown", startDrawing, false)
     canvas.addEventListener("mousemove", draw, false)
     canvas.addEventListener("mouseup", stopDrawing, false)
+    canvas.addEventListener("mouseleave", stopDrawing, false)
 
     canvas.addEventListener("touchstart", startDrawing, false)
     canvas.addEventListener("touchmove", draw, false)
     canvas.addEventListener("touchend", stopDrawing, false)
+    canvas.addEventListener("touchcancel", stopDrawing, false)
   }
 
   render() {
     return (
-      <Window className="Canvas">
-        <canvas 
-          width="600"
-          height="400"
-          ref="canvas"
-        />
-      </Window>
+      <canvas 
+        width="720"
+        height="720"
+        ref="canvas"
+      />
     )
   }
 }

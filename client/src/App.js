@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react"
-import ColorPicker from "./components/ColorPicker"
-import Canvas from "./components/Canvas"
+import Header from "./components/Header"
+import DrawingTool from "./components/DrawingTool"
 
 import "./App.css"
 
 function App() {
   return (
-    <div className="App">
-      <Canvas/>
-      <ColorPicker/>
+    <div>
+      <Header/>
+      <div className="App">
+        <DrawingTool/>
+      </div>
     </div>
   )
 }
