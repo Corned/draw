@@ -19,6 +19,12 @@ class Canvas extends React.Component {
 
     const socket = io("/")
 
+    socket.on("replication", (dataUrl, x) => {
+      const img = new Image
+      img.onload = () => ctx.drawImage(img, 0, 0)
+      img.src = dataUrl
+    })
+
     socket.on("draw", (data) => {
       const { color, size, from, to } = data
 
