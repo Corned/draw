@@ -128,19 +128,11 @@ class Canvas extends React.Component {
 
   render() {
     return (
-      <div
-        style={{
-          display: "flex",
-          "flexDirection": "column",
-        }}
-      >
-        <canvas 
-          width="720"
-          height="720"
-          ref="canvas"
-        />
-        <button onClick={() => this.clear()}>clear</button>
-      </div>
+      <canvas 
+        width="720"
+        height="720"
+        ref="canvas"
+      />
     )
   }
 }

@@ -4,6 +4,7 @@ canvas {
   width: 720px;
   height: 720px;
   margin: auto;
+  border-radius: 4px;
 }
 
 canvas:hover {

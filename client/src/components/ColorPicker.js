@@ -12,10 +12,10 @@ const PickColor = posed.div({
     scale: 1,
   },
   press: {
-    scale: 0.95,
+    scale: 1,
   },
   hover: {
-    scale: 1.05,
+    scale: 1,
   },
 })
 
@@ -34,21 +34,24 @@ const SelectionIndicator = posed.div({
 const ColorPicker = ({ color, setColor }) => {
   return (
     <div className="ColorPicker">
-      { colors.map(hex => {
-        
-        return (
-          <PickColor 
-            className="color-option" 
-            style={{backgroundColor: hex}}
-            onClick={() => setColor(hex)}
-          >
-            <SelectionIndicator
-              pose={ color === hex ? "selected" : "init" }
-            />
-          </PickColor>
-        )
+      <div className="color-preview"/>
+      <div className="color-options">
+        { colors.map(hex => {
+          
+          return (
+            <PickColor 
+              className="color-option" 
+              style={{backgroundColor: hex}}
+              onClick={() => setColor(hex)}
+            >
+              <SelectionIndicator
+                pose={ color === hex ? "selected" : "init" }
+              />
+            </PickColor>
+          )
 
-      })}
+        })}
+      </div>
     </div>
   )
 }
