@@ -10,7 +10,15 @@ class Canvas extends React.Component {
     this.state = {
       drawing: false,
       lastPoint: { x: null, y: null },
+      clear: false,
     }
+  }
+
+  
+  clear = (event) => {
+    const canvas = this.refs.canvas
+    const ctx = canvas.getContext("2d")
+    ctx.clearRect(0, 0, 720, 720)
   }
 
   componentDidMount() {
@@ -120,11 +128,19 @@ class Canvas extends React.Component {
 
   render() {
     return (
-      <canvas 
-        width="720"
-        height="720"
-        ref="canvas"
-      />
+      <div
+        style={{
+          display: "flex",
+          "flexDirection": "column",
+        }}
+      >
+        <canvas 
+          width="720"
+          height="720"
+          ref="canvas"
+        />
+        <button onClick={() => this.clear()}>clear</button>
+      </div>
     )
   }
 }
