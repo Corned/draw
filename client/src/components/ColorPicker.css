@@ -12,14 +12,14 @@
   padding: 7px 10px;
 }
 
-.color-options {
+.color-grid {
   display: grid;
   grid-template-columns: repeat(11, 1fr);
   background: white;
   grid-gap: 8px;
 }
 
-.color-options__option {
+.color-grid__option {
   height: 40px;
   width: 40px;
   cursor: pointer;

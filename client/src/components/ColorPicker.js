@@ -4,7 +4,7 @@ import posed from "react-pose"
 import colors from "../constants/Colors"
 import "./ColorPicker.css"
 
-const PickColor = posed.div({
+const ColorGridOption = posed.div({
   pressable: true,
   hoverable: true,
 
@@ -12,10 +12,10 @@ const PickColor = posed.div({
     scale: 1,
   },
   press: {
-    scale: 0.975,
+    scale: 0.9,
   },
   hover: {
-    scale: 1.05,
+    scale: 1.1,
   },
 })
 
@@ -28,33 +28,30 @@ const getContrastYIQ = (hexColor) => {
   return (yiq >= 156) ? '#000000' : '#ffffff';
 }
 
-const NewColorPicker = ({ color, setColor }) => {
-  const textColor = getContrastYIQ(color)
+const NewColorPicker = ({ color: currentColor, setColor }) => {
+  const textColor = getContrastYIQ(currentColor)
 
   return (
-    <div className="color-picker">
+    <div className="frame frame--padding">
       <div 
         className="hex-input" 
-        style={{backgroundColor:color}}>
+        style={{ backgroundColor:currentColor }}>
         <p 
           className="hex-input__code"
-          style={{color: textColor}}>
-          {color}
+          style={{ color: textColor }}>
+          {currentColor}
         </p>
       </div>
       
-      <div className="color-options">
-        { colors.map(hex => {
-          
-          return (
-            <PickColor 
-              className="color-options__option" 
-              style={{backgroundColor: hex}}
-              onClick={() => setColor(hex)}
+      <div className="color-grid">
+        { colors.map((color) => (
+            <ColorGridOption 
+              className="color-grid__option" 
+              style={{ backgroundColor: color }}
+              onClick={() => setColor(color)}
             />
           )
-
-        })}
+        )}
       </div>
     </div>
   )
