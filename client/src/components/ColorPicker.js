@@ -2,7 +2,7 @@ import React from "react"
 import posed from "react-pose"
 
 import colors from "../constants/Colors"
-import "./NewColorPicker.css"
+import "./ColorPicker.css"
 
 const PickColor = posed.div({
   pressable: true,
@@ -29,14 +29,18 @@ const getContrastYIQ = (hexColor) => {
 }
 
 const NewColorPicker = ({ color, setColor }) => {
-  //const color = "#4BCB7C"
-  console.log(color)
   const textColor = getContrastYIQ(color)
 
   return (
-    <div className="NewColorPicker">
-      <div className="hex-input" style={{backgroundColor:color}}>
-        <p style={{color:textColor}}>{color}</p>
+    <div className="color-picker">
+      <div 
+        className="hex-input" 
+        style={{backgroundColor:color}}>
+        <p 
+          className="hex-input__code"
+          style={{color: textColor}}>
+          {color}
+        </p>
       </div>
       
       <div className="color-options">
@@ -44,7 +48,7 @@ const NewColorPicker = ({ color, setColor }) => {
           
           return (
             <PickColor 
-              className="color-option" 
+              className="color-options__option" 
               style={{backgroundColor: hex}}
               onClick={() => setColor(hex)}
             />

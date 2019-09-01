@@ -11,7 +11,7 @@ const DrawingTool = () => {
   const [ color, setColor ] = useState("#000000")
 
   return (
-    <div className="DrawingTool">
+    <div className="drawing-tool">
       <Canvas 
         size={size} 
         color={color}

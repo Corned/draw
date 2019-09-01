@@ -1,7 +1,4 @@
 canvas {
-  background: white;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  box-shadow: 0 2px 5px -3px black;
   width: 750px;
   height: 500px;
   margin: auto;

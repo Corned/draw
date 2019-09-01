@@ -7,10 +7,10 @@ const app = express()
 const server = require("http").Server(app)
 const io = socketio(server)
 
-const canvas = createCanvas(720, 720)
+const canvas = createCanvas(750, 500)
 const ctx = canvas.getContext("2d")
 ctx.fillStyle = "white"
-ctx.fillRect(0, 0, 720, 720)
+ctx.fillRect(0, 0, 750, 500)
 
 io.on("connection", (socket) => {
   console.log("Someone connected!")
@@ -34,7 +34,16 @@ io.on("connection", (socket) => {
 
 app.use(express.static(path.join(__dirname, "build")))
 
-app.get("/", (req, res) => {
+app.get("/clear", (req, res) => {
+  ctx.fillStyle = "white"
+  ctx.fillRect(0, 0, 750, 500)
+
+  res.sendFile(
+    path.join(__dirname, "build", "index.html")
+  )
+})
+
+app.get("*", (req, res) => {
   res.sendFile(
     path.join(__dirname, "build", "index.html")
   )

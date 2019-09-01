@@ -1,14 +1,14 @@
 import React, { useState } from "react"
 import posed from "react-pose"
 
-import NewColorPicker from "./NewColorPicker"
+import ColorPicker from "./ColorPicker"
 
 import "./Toolbar.css"
 
 const Toolbar = ({ color, size, setColor, setSize}) => {
   return (
-    <div className="Toolbar">
-      <NewColorPicker color={color} setColor={setColor}/>
+    <div className="frame toolbar">
+      <ColorPicker color={color} setColor={setColor}/>
     </div>
   )
 }
