@@ -1,6 +1,6 @@
 (
   cd client
   npm install
-  GENERATE_SOURCEMAP=false && npm run build
+  GENERATE_SOURCEMAP=false npm run build
   mv build ..
 )
