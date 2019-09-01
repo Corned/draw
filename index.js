@@ -9,6 +9,8 @@ const io = socketio(server)
 
 const canvas = createCanvas(720, 720)
 const ctx = canvas.getContext("2d")
+ctx.fillStyle = "white"
+ctx.fillRect(0, 0, 720, 720)
 
 io.on("connection", (socket) => {
   console.log("Someone connected!")

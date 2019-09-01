@@ -6,11 +6,7 @@ import "./Header.css"
 const Header = () => {
   return (
     <div className="Header">
-      <h1 className="logo">OwO</h1>
-      <a>home</a>
-      <a>weather</a>
-      <a className="current">draw</a>
-      <a>chat</a>
+      <h1 className="logo">draw.owo</h1> 
     </div>
   )
 }

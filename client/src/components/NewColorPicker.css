@@ -1,17 +1,20 @@
-.ColorPicker {
-  display: flex;
-  flex-direction: row;
+.NewColorPicker {
 }
 
-.color-preview {
-  background: red;
+.hex-input {
+  border-radius: 2px;
+  padding: 7px 10px;
+  margin-bottom: 10px;
+  font-size: 20px;
+
+  box-shadow: 0 0px 3px -1px black;
 }
 
 .color-options {
   display: grid;
   grid-template-columns: repeat(11, 1fr);
   background: white;
-  grid-gap: 2px;
+  grid-gap: 8px;
 }
 
 .color-option {
@@ -19,7 +22,8 @@
   height: 40px;
   width: 40px;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 2px;
+  box-shadow: 0 0px 3px -1px black;
 }
 
 .color-option > div {
