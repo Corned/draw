@@ -1,7 +1,7 @@
 import React, { useRef, forwardRef, useEffect, useState } from "react"
 import io from "socket.io-client"
 
-import "./Canvas.css"
+import "./index.css"
 
 class Canvas extends React.Component {
   constructor(props) {

@@ -1,8 +1,8 @@
 import React from "react"
 import posed from "react-pose"
 
-import colors from "../constants/Colors"
-import "./ColorPicker.css"
+import colors from "constants/Colors"
+import "./index.css"
 
 const ColorGridOption = posed.div({
   pressable: true,

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
-import Header from "./components/Header"
-import DrawingTool from "./components/DrawingTool"
+
+import Header from "./common/components/Header"
+import Draw from "./views/Draw"
 
 import "./App.css"
 
@@ -9,7 +10,7 @@ function App() {
     <div>
       <Header/>
       <div className="app">
-        <DrawingTool/>
+        <Draw/>
       </div>
     </div>
   )

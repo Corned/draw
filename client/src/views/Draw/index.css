@@ -1,0 +1,14 @@
+.drawing-tool {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.drawing-tool__toolbar {
+  margin: 20px auto;
+  width: 750px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
