@@ -1,0 +1,23 @@
+.header {
+  width: 100%;
+  padding: 20px;
+  
+  display: flex;
+  flex-direction: row;
+}
+
+.header > * {
+  cursor: pointer;
+  margin: auto 0;
+}
+
+.header__logo {
+  color: rgba(0, 0, 0, 0.9);
+  margin: 0 20px;
+}
+
+.header__link {
+  text-decoration: none;
+  color: black;
+  font-size: 25px;
+}

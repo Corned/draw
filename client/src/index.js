@@ -9,12 +9,12 @@ import "./index.css"
 
 const App = () => {
   return (
-    <div className="app">
+    <Router className="app">
       <Header/>
-      <Router className="view-container">
+      <div className="view-container">
         { Routes }
-      </Router>
-    </div>
+      </div>
+    </Router>
   )
 }
 
