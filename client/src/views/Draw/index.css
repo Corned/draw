@@ -5,7 +5,7 @@
 }
 
 .drawing-tool__toolbar {
-  margin: 20px auto;
+  margin: 20px auto 0 auto;
   width: 750px;
 
   display: flex;
