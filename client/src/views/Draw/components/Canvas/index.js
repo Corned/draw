@@ -1,4 +1,4 @@
-import React, { useRef, forwardRef, useEffect, useState } from "react"
+import React from "react"
 import io from "socket.io-client"
 
 import "./index.css"
@@ -28,7 +28,7 @@ class Canvas extends React.Component {
     const socket = io("/")
 
     socket.on("replication", (dataUrl, x) => {
-      const img = new Image
+      const img = new Image()
       img.onload = () => ctx.drawImage(img, 0, 0)
       img.src = dataUrl
     })

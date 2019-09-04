@@ -1,4 +1,4 @@
-.header {
+.nav {
   width: 100%;
   padding: 20px;
   
@@ -6,17 +6,17 @@
   flex-direction: row;
 }
 
-.header > * {
+.nav > * {
   cursor: pointer;
   margin: auto 0;
 }
 
-.header__logo {
+.nav__logo {
   color: rgba(0, 0, 0, 0.9);
   margin: 0 20px;
 }
 
-.header__link {
+.nav__link {
   text-decoration: none;
   color: black;
   font-size: 25px;
