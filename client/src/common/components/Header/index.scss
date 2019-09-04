@@ -1,9 +1,10 @@
 .nav {
   width: 100%;
-  padding: 20px;
+  height: 80px;
   
   display: flex;
   flex-direction: row;
+  padding: 0 20px;
 
   & > * {
     cursor: pointer;
@@ -12,12 +13,10 @@
 }
 
 .nav__logo {
-  color: rgba(0, 0, 0, 0.9);
-  margin: 0 20px;
+  font-size: 30px;
 }
 
 .nav__link {
   text-decoration: none;
   color: black;
-  font-size: 25px;
 }

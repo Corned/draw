@@ -9,10 +9,12 @@ import "./index.scss"
 
 const App = () => {
   return (
-    <Router className="app">
-      <Header/>
-      <div className="view-container">
-        { Routes }
+    <Router>
+      <div className="app">
+        <Header/>
+        <div className="view-container">
+          { Routes }
+        </div>
       </div>
     </Router>
   )
