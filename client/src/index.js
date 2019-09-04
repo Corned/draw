@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom"
 import Header from "common/components/Header"
 import Routes from "constants/Routes"
 
-import "./index.css"
+import "./index.scss"
 
 const App = () => {
   return (

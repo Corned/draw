@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import posed from "react-pose"
 
-import "./index.css"
+import "./index.scss"
 
 const Button = posed.button({
   hoverable: true,

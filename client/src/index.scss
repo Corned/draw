@@ -38,19 +38,19 @@ button {
   padding: 10px 20px;
   font-size: 20px;
   border: 1px solid rgba(0, 0, 0, 0.3);
-  transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 0.1s cubic-bezier(0.19, 1, 0.22, 1);
   cursor: pointer;
-}
 
-button:hover {
-  box-shadow: 0 3px 0px 0 rgba(0, 0, 0, 0.3);
-  top: -3px;
-}
+  &:hover {
+    box-shadow: 0 3px 0px 0 rgba(0, 0, 0, 0.3);
+    top: -3px;
+  }
 
-button:active {
-  top: 3px;
-  box-shadow: 0 0 0 0 black;;
-  padding-bottom: 7px;
+  &:active {
+    top: 3px;
+    box-shadow: 0 0 0 0 black;;
+    padding-bottom: 7px;
+  }
 }
 
 #root {

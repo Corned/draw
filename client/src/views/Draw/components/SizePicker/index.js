@@ -2,7 +2,7 @@ import React from "react"
 import posed from "react-pose"
 import classnames from "classnames"
 
-import "./index.css"
+import "./index.scss"
 
 const SizeGridOption = posed.div({
   pressable: true,

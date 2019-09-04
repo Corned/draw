@@ -4,7 +4,7 @@ import Canvas from "./components/Canvas"
 import ColorPicker from "./components/ColorPicker"
 import SizePicker from "./components/SizePicker"
 
-import "./index.css"
+import "./index.scss"
 
 const DrawingTool = () => {
   const [ size, setSize ] = useState(5)
