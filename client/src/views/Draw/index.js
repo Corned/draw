@@ -6,7 +6,7 @@ import SizePicker from "./components/SizePicker"
 
 import "./index.scss"
 
-const DrawingTool = () => {
+const DrawingTool = ({ match }) => {
   const [ size, setSize ] = useState(5)
   const [ color, setColor ] = useState("#000000")
 
@@ -15,6 +15,7 @@ const DrawingTool = () => {
       <Canvas 
         size={size} 
         color={color}
+        id={match.params.id}
       />
 
       <div className="drawing-tool__toolbar">

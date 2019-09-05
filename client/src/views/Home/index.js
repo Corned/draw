@@ -1,5 +1,5 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React, { useState } from "react"
+import { Link, Redirect } from "react-router-dom"
 import posed from "react-pose"
 
 import "./index.scss"
@@ -16,10 +16,16 @@ const Button = posed.button({
 })
 
 const Home = () => {
+  const [ redirectId, setRedirectId ] = useState(null)
+
   const createPrivate = () => {
     fetch("/api/create-room")
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(({ roomId }) => setRedirectId(roomId))
+  }
+
+  if (redirectId) {
+    return <Redirect to={`/private/${redirectId}`}/>
   }
 
   return (
@@ -29,8 +35,8 @@ const Home = () => {
         <Link to="/public">
           <button>join the public room</button>
         </Link>
-        <button onClick={createPrivate}>create a private room</button>
         <button disabled>join a private room</button>
+        <button onClick={createPrivate}>create a private room</button>
       </div>
     </div>
   )

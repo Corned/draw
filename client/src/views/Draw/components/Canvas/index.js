@@ -13,7 +13,6 @@ class Canvas extends React.Component {
       clear: false,
     }
   }
-
   
   clear = (event) => {
     const canvas = this.refs.canvas
