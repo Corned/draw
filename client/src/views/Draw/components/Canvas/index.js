@@ -25,7 +25,7 @@ class Canvas extends React.Component {
     const canvas = this.refs.canvas
     const ctx = canvas.getContext("2d")
 
-    const socket = io("/")
+    const socket = io(`/${this.props.id || "public"}`)
 
     socket.on("replication", (dataUrl, x) => {
       const img = new Image()
