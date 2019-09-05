@@ -15,7 +15,6 @@ const Button = posed.button({
   },
 })
 
-
 const Home = () => {
   return (
     <div className="home">
@@ -25,6 +24,7 @@ const Home = () => {
           <button>join the public room</button>
         </Link>
         <button disabled>create a private room</button>
+        <button disabled>join a private room</button>
       </div>
     </div>
   )

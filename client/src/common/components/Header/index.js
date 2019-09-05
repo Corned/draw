@@ -7,7 +7,7 @@ const Navigation = () => {
   return (
     <nav className="nav">
       <h1 className="nav__logo">
-        <Link className="nav__link" to="/">owo.draw</Link>
+        <Link className="nav__link" to="/">draw.owo</Link>
       </h1>
     </nav>
   )
