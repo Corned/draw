@@ -35,8 +35,8 @@ const Home = () => {
         <Link to="/public">
           <button>join the public room</button>
         </Link>
-        <button disabled>join a private room</button>
         <button onClick={createPrivate}>create a private room</button>
+        <button disabled>join a private room</button>
       </div>
     </div>
   )

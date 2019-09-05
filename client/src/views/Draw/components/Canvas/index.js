@@ -11,6 +11,7 @@ class Canvas extends React.Component {
       drawing: false,
       lastPoint: { x: null, y: null },
       clear: false,
+      socket: io(`/${this.props.id || "public"}`),
     }
   }
   
@@ -20,11 +21,15 @@ class Canvas extends React.Component {
     ctx.clearRect(0, 0, 720, 720)
   }
 
+  componentWillUnmount() {
+    this.state.socket.disconnect(true)
+  }
+
   componentDidMount() {
     const canvas = this.refs.canvas
     const ctx = canvas.getContext("2d")
 
-    const socket = io(`/${this.props.id || "public"}`)
+    const socket = this.state.socket
 
     socket.on("replication", (dataUrl, x) => {
       const img = new Image()
