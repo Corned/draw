@@ -8,7 +8,7 @@ const io = socketio(server)
 
 
 app.use(express.static(path.join(__dirname, "build")))
-app.use("/api", require("./api/RoomApi")(io))
+app.use("/api/canvas", require("./api/CanvasApi")(io))
 
 app.get("*", (req, res) => {
   res.sendFile(
@@ -19,5 +19,6 @@ app.get("*", (req, res) => {
 server.listen(process.env.PORT || 80, () => {
   console.log(`listening to port ${ process.env.PORT || 80 }.`)
 
-  new (require("./api/RoomHandler"))(io, true)
+  // TODO: clean
+  //new (require("./api/Room"))(io, true)
 })

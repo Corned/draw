@@ -14,8 +14,9 @@ const DrawingTool = ({ match }) => {
   return (
     <div className="drawing-tool">
       <p style={{ marginBottom: "3px" }}>
-        Your invite code: <b>{id}</b>
+        ID: <b>{id}</b>
       </p>
+      
       <Canvas 
         size={size} 
         color={color}

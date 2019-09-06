@@ -19,7 +19,7 @@ const Home = () => {
   const [ redirectId, setRedirectId ] = useState(null)
 
   const createPrivate = () => {
-    fetch("/api/create-room")
+    fetch("/api/canvas/create")
       .then(response => response.json())
       .then(({ roomId }) => setRedirectId(roomId))
   }
@@ -32,9 +32,7 @@ const Home = () => {
     <div className="home">
       <h1 className="header--giant">Welcome to draw.owo!</h1>
       <div className="buttons">
-        <Link to="/public">
-          <button>join the public room</button>
-        </Link>
+        <button disabled>join the public room</button>
         <button onClick={createPrivate}>create a private room</button>
         <button disabled>join a private room</button>
       </div>

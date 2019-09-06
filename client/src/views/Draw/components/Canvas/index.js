@@ -11,8 +11,10 @@ class Canvas extends React.Component {
       drawing: false,
       lastPoint: { x: null, y: null },
       clear: false,
-      socket: io(`/${this.props.id || "public"}`),
+      socket: io(`/${this.props.id}`),
     }
+
+    console.log(`/${this.props.id || "public"}`)
   }
   
   clear = (event) => {
