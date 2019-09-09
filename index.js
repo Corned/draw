@@ -26,6 +26,24 @@ const getRoom = (roomName) => {
   return null
 }
 
+const removeRoom = (roomName) => {
+  for (const roomIndex in rooms) {
+    const room = rooms[roomIndex]
+    if (room.name === roomName) {
+      rooms.splice(roomIndex, 1)
+      console.log(`Room "${roomName}" removed}`)
+      return
+    }
+  }
+}
+
+const incrementRoomUsersBy = (roomName, n) => {
+  const room = getRoom(roomName)
+  room.users += n
+}
+
+const getRoomUsers = (roomName) => getRoom(roomName).users
+
 const formatSocketId = socket => socket.id.substring(23, 28)
 
 io.of("/canvas").on("connection", (socket) => {
@@ -38,7 +56,9 @@ io.of("/canvas").on("connection", (socket) => {
     }
 
     socket.join(roomName)
-    console.log(`Socket joined room "${roomName}"`)
+    incrementRoomUsersBy(roomName, 1)
+
+    console.log(`Socket joined room "${roomName}", (${getRoomUsers(roomName)})`)
 
     socket.emit("room-joined-success", `Joined room "${roomName}"`)
   })
@@ -50,7 +70,11 @@ io.of("/canvas").on("connection", (socket) => {
   })
 
   socket.on("room-leave", (roomName) => {
-    console.log(`Socket leaving room "${roomName}"!`)
+    incrementRoomUsersBy(roomName, -1)
+    console.log(`Socket leaving room "${roomName}"!, (${getRoomUsers(roomName)})`)
+    if (getRoomUsers(roomName) === 0) {
+      removeRoom(roomName)
+    }
     socket.leave(roomName)
     console.log(`Disconnecting socket... | ${formatSocketId(socket)}`)
     socket.disconnect(true)
