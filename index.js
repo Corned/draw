@@ -109,16 +109,7 @@ io.of("/canvas").on("connection", (socket) => {
   })
 })
 
-
-
-
-
-
-
-
-
 app.use(express.static(path.join(__dirname, "build")))
-app.use("/api/canvas", require("./api/CanvasApi")(io))
 
 app.get("*", (req, res) => {
   res.sendFile(
