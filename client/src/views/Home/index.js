@@ -24,16 +24,24 @@ const Home = () => {
       .then(({ roomId }) => setRedirectId(roomId))
   }
 
+  const joinPrivate = () => {
+
+  }
+
+  const joinPublic = () => {
+    setRedirectId("public")
+  }
+
   if (redirectId) {
-    return <Redirect to={`/private/${redirectId}`}/>
+    return <Redirect to={`/${redirectId}`}/>
   }
 
   return (
     <div className="home">
       <h1 className="header--giant">Welcome to draw.owo!</h1>
       <div className="buttons">
-        <button disabled>join the public room</button>
-        <button onClick={createPrivate}>create a private room</button>
+        <button onClick={joinPublic}>join the public room</button>
+        <button disabled>create a private room</button>
         <button disabled>join a private room</button>
       </div>
     </div>

@@ -10,11 +10,8 @@ class Canvas extends React.Component {
     this.state = {
       drawing: false,
       lastPoint: { x: null, y: null },
-      clear: false,
-      socket: io(`/${this.props.id}`),
+      socket: props.socket,
     }
-
-    console.log(`/${this.props.id || "public"}`)
   }
   
   clear = (event) => {
@@ -23,23 +20,22 @@ class Canvas extends React.Component {
     ctx.clearRect(0, 0, 720, 720)
   }
 
-  componentWillUnmount() {
-    this.state.socket.disconnect(true)
-  }
-
   componentDidMount() {
+    const socket = this.state.socket
     const canvas = this.refs.canvas
     const ctx = canvas.getContext("2d")
 
-    const socket = this.state.socket
+    socket.emit("request-replication", this.props.roomId)
 
-    socket.on("replication", (dataUrl, x) => {
+    socket.on("replication", (dataUrl) => {
+      console.log("replication")
       const img = new Image()
       img.onload = () => ctx.drawImage(img, 0, 0)
       img.src = dataUrl
     })
 
     socket.on("draw", (data) => {
+      console.log("draw")
       const { color, size, from, to } = data
 
       ctx.beginPath()
@@ -55,7 +51,6 @@ class Canvas extends React.Component {
     const draw = (event) => {
       if (!this.state.drawing)
         return
-
 
       const { lastPoint: from } = this.state
       const { color, size } = this.props
