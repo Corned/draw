@@ -7,87 +7,111 @@ const server = require("http").Server(app)
 const io = socketio(server)
 
 
-const rooms = [ ]
 const { createCanvas } = require("canvas")
 
-const createRoom = (roomName) => ({
-  name: roomName,
-  users: 0,
-  canvas: createCanvas(750, 500),
-})
 
-const getRoom = (roomName) => {
-  for (const roomData of rooms) {
-    if (roomData.name === roomName) {
-      return roomData
-    }
+class RoomHandler {
+  constructor() {
+    this.rooms = []
   }
 
-  return null
-}
+  createRoom(id) {
+    const room = new Room(id)
+    this.rooms.push(room)
+    return room
+  }
 
-const removeRoom = (roomName) => {
-  for (const roomIndex in rooms) {
-    const room = rooms[roomIndex]
-    if (room.name === roomName) {
-      rooms.splice(roomIndex, 1)
-      return
-    }
+  destroyRoom(id) {
+    const roomFilter = (roomId) => roomId !== room
+    this.rooms = this.rooms.filter(roomFilter)
+  }
+
+  getRoomById(id) {
+    const roomFilter = (room) => room.id === id
+    const filteredRooms = this.rooms.filter(roomFilter)
+
+    return filteredRooms.length > 0 ? filteredRooms[0] : null
   }
 }
 
-const incrementRoomUsersBy = (roomName, n) => {
-  const room = getRoom(roomName)
-  room.users += n
+class Room {
+  constructor(id) {
+    this.id = id
+    this.canvas = createCanvas(750, 500)
+    this.users = []
+  }
+
+  userExists(id) {
+    return this.users.includes(id)
+  }
+
+  addUser(id) {
+    if (this.users.includes(id))
+      return null
+    
+    this.users.push(id)
+  }
+
+  removeUser(id) {
+    if (!this.users.includes(id))
+      return null
+
+    const userFilter = (userId) => userId !== id
+    this.users = this.users.filter(userFilter)
+  }
 }
 
-const getRoomUsers = (roomName) => getRoom(roomName).users
-
-const formatSocketId = socket => socket.id.substring(23, 28)
+const roomHandler = new RoomHandler()
 
 io.of("/canvas").on("connection", (socket) => {
-  console.log(`Socket connection! | ${formatSocketId(socket)}`)
-  socket.on("room-join", (roomName) => {
-    console.log(`Socket trying to join room "${roomName}"`, socket.rooms)
-    if (!getRoom(roomName)) {
-      console.log(`Room "${roomName}" doesn't exist, creating one.`)
-      rooms.push(createRoom(roomName))
+
+  socket.on("room-join", (roomId) => {
+    if (!roomHandler.getRoomById(roomId)) {
+      roomHandler.createRoom(roomId)
     }
 
-    socket.join(roomName)
-    incrementRoomUsersBy(roomName, 1)
+    const room = roomHandler.getRoomById(roomId)
+    if (room.userExists(socket.id)) {
+      //return 
+    }
 
-    console.log(`Socket joined room "${roomName}", (${getRoomUsers(roomName)})`)
-
-    socket.emit("room-joined-success", `Joined room "${roomName}"`)
+    room.addUser(socket.id)
+    socket.join(roomId)
+    socket.emit("room-joined-success", `Joined room "${roomId}"`)
   })
 
-  socket.on("request-replication", (roomName) => {
-    console.log(`Requesting replication for room "${roomName}" | ${formatSocketId(socket)}`)
-    const room = getRoom(roomName)
+  socket.on("room-leave", (roomId) => {
+    if (!roomHandler.getRoomById(roomId)) {
+      return
+    }
+
+    const room = roomHandler.getRoomById(roomId)
+    if (!room.userExists) {
+      //return
+    }
+
+    room.removeUser(socket.id)
+    socket.leave(roomId)
+    socket.disconnect(true)
+  })
+
+  socket.once("request-replication", (roomId) => {
+    const room = roomHandler.getRoomById(roomId)
     socket.emit("replication", room.canvas.toDataURL())
   })
 
-  socket.on("room-leave", (roomName) => {
-    incrementRoomUsersBy(roomName, -1)
-    console.log(`Socket leaving room "${roomName}"!, (${getRoomUsers(roomName)})`)
-    if (getRoomUsers(roomName) === 0) {
-      removeRoom(roomName)
-      console.log(`Room "${roomName}" is empty, removing room..`)
-    }
-    socket.leave(roomName)
-    console.log(`Disconnecting socket... | ${formatSocketId(socket)}`)
-    socket.disconnect(true)
+  socket.once("disconnect", () => {
+    
   })
 
   socket.on("draw", (data) => {
     const rooms = Object.keys(socket.rooms).slice(1)
     if (rooms.length !== 1) {
-      return socket.emit("err", "you're joined to multple rooms??")
+      return socket.emit("err", "Something went wrong, please refresh the window.")
     }
 
-    const roomName = rooms[0]
-    const room = getRoom(roomName)
+    const roomId = rooms[0]
+    const room = roomHandler.getRoomById(roomId)
 
     const { color, size, from, to } = data
     const ctx = room.canvas.getContext("2d")
@@ -101,12 +125,9 @@ io.of("/canvas").on("connection", (socket) => {
     ctx.closePath()
     ctx.stroke()
 
-    socket.to(roomName).broadcast.emit("draw", data)
+    socket.to(roomId).broadcast.emit("draw", data)
   })
 
-  socket.once("disconnect", (x, y, z) => {
-    console.log(`Socket disconnected! | ${formatSocketId(socket)}`)
-  })
 })
 
 app.use(express.static(path.join(__dirname, "build")))
