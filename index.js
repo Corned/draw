@@ -31,21 +31,26 @@ const formatSocketId = socket => socket.id.substring(23, 28)
 io.of("/canvas").on("connection", (socket) => {
   console.log(`Socket connection! | ${formatSocketId(socket)}`)
   socket.on("room-join", (roomName) => {
-    console.log(`Socket trying to join room ${roomName}`)
-    if (!rooms.includes(roomName)) {
-      console.log(`Room ${roomName} doesn't exist, creating once.`)
+    console.log(`Socket trying to join room "${roomName}"`)
+    if (!getRoom(roomName)) {
+      console.log(`Room "${roomName}" doesn't exist, creating one.`)
       rooms.push(createRoom(roomName))
-      //return socket.emit("err", `Invalid room name ${roomName}`)
     }
 
     socket.join(roomName)
-    console.log(`Socket managed to join room ${roomName}`)
-    socket.emit("replication", getRoom(roomName).canvas.toDataURL())
-    socket.emit("success", `Joined room ${roomName}`)
+    console.log(`Socket joined room "${roomName}"`)
+
+    socket.emit("room-joined-success", `Joined room "${roomName}"`)
+  })
+
+  socket.on("request-replication", (roomName) => {
+    console.log(`Requesting replication for room "${roomName}" | ${formatSocketId(socket)}`)
+    const room = getRoom(roomName)
+    socket.emit("replication", room.canvas.toDataURL())
   })
 
   socket.on("room-leave", (roomName) => {
-    console.log(`Socket leaving room ${roomName}!`)
+    console.log(`Socket leaving room "${roomName}"!`)
     socket.leave(roomName)
     console.log(`Disconnecting socket... | ${formatSocketId(socket)}`)
     socket.disconnect(true)
@@ -72,7 +77,7 @@ io.of("/canvas").on("connection", (socket) => {
     ctx.closePath()
     ctx.stroke()
 
-    socket.broadcast.to(room).emit("draw", data)
+    socket.to(roomName).broadcast.emit("draw", data)
   })
 
   socket.once("disconnect", (x, y, z) => {

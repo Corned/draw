@@ -8,12 +8,9 @@ class Canvas extends React.Component {
     super(props)
 
     this.state = {
-      loading: true,
-      error: null,
       drawing: false,
       lastPoint: { x: null, y: null },
-      clear: false,
-      socket: io("/canvas"),
+      socket: props.socket,
     }
   }
   
@@ -23,40 +20,22 @@ class Canvas extends React.Component {
     ctx.clearRect(0, 0, 720, 720)
   }
 
-  componentWillUnmount() {
-    this.state.socket.emit("room-leave", this.props.id)
-  }
-
   componentDidMount() {
     const socket = this.state.socket
     const canvas = this.refs.canvas
     const ctx = canvas.getContext("2d")
 
-    socket.on("connect", () => {
-      console.log(`Socket connected | ${this.props.id}`)
-      socket.emit("room-join", this.props.id)
-    })
+    socket.emit("request-replication", this.props.roomId)
 
-    socket.on("success", (data) => {
-      console.log(`SUCCESS: ${data}`)
-      this.setState({ loading: false })
-    })
-
-    socket.on("err", (data) => {
-      console.log(`ERROR: ${data}`)
-
-      this.setState({ error: data })
-    })
-
-    socket.on("replication", (dataUrl, x) => {
+    socket.on("replication", (dataUrl) => {
+      console.log("replication")
       const img = new Image()
       img.onload = () => ctx.drawImage(img, 0, 0)
       img.src = dataUrl
-
-      this.setState({ loading: false })
     })
 
     socket.on("draw", (data) => {
+      console.log("draw")
       const { color, size, from, to } = data
 
       ctx.beginPath()
@@ -72,7 +51,6 @@ class Canvas extends React.Component {
     const draw = (event) => {
       if (!this.state.drawing)
         return
-
 
       const { lastPoint: from } = this.state
       const { color, size } = this.props
@@ -150,19 +128,13 @@ class Canvas extends React.Component {
   }
 
   render() {
-    const { loading, error } = this.state
-
     return (
-      <>
-        <p>ERROR: {error}</p>
-        <p>LOADING: {""+loading}</p>
-        <canvas
-          className="frame"
-          width="750"
-          height="500"
-          ref="canvas"
-        />
-      </>
+      <canvas
+        className="frame"
+        width="750"
+        height="500"
+        ref="canvas"
+      />
     )
   }
 }
