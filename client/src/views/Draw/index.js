@@ -38,7 +38,15 @@ const DrawingTool = ({ match }) => {
       setError(message)
     })
 
-    return function cleanup() {
+    // useEffect's cleanup function doesn't fire when
+    // the user closes the window.
+    window.addEventListener("beforeunload", (event) => {
+      event.preventDefault()
+      console.log(`CLEANUP! Leaving room ${roomId}`)
+      socket.emit("room-leave", roomId)
+    })
+
+    return () => {
       console.log(`CLEANUP! Leaving room ${roomId}`)
       socket.emit("room-leave", roomId)
     }
@@ -49,7 +57,7 @@ const DrawingTool = ({ match }) => {
   }
 
   if (loading) {
-    return <h1 className="header--giant">loading room..</h1>
+    return <h1 className="header--giant">joining room "{roomId}"</h1>
   }
   
   return (

@@ -31,7 +31,6 @@ const removeRoom = (roomName) => {
     const room = rooms[roomIndex]
     if (room.name === roomName) {
       rooms.splice(roomIndex, 1)
-      console.log(`Room "${roomName}" removed}`)
       return
     }
   }
@@ -49,7 +48,7 @@ const formatSocketId = socket => socket.id.substring(23, 28)
 io.of("/canvas").on("connection", (socket) => {
   console.log(`Socket connection! | ${formatSocketId(socket)}`)
   socket.on("room-join", (roomName) => {
-    console.log(`Socket trying to join room "${roomName}"`)
+    console.log(`Socket trying to join room "${roomName}"`, socket.rooms)
     if (!getRoom(roomName)) {
       console.log(`Room "${roomName}" doesn't exist, creating one.`)
       rooms.push(createRoom(roomName))
@@ -74,6 +73,7 @@ io.of("/canvas").on("connection", (socket) => {
     console.log(`Socket leaving room "${roomName}"!, (${getRoomUsers(roomName)})`)
     if (getRoomUsers(roomName) === 0) {
       removeRoom(roomName)
+      console.log(`Room "${roomName}" is empty, removing room..`)
     }
     socket.leave(roomName)
     console.log(`Disconnecting socket... | ${formatSocketId(socket)}`)
