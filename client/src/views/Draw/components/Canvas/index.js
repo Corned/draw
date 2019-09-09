@@ -24,7 +24,7 @@ class Canvas extends React.Component {
   }
 
   componentWillUnmount() {
-    this.state.socket.disconnect(true)
+    this.state.socket.emit("room-leave", this.props.id)
   }
 
   componentDidMount() {
