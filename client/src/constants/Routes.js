@@ -11,14 +11,8 @@ const routeData = [
     exact: true,
   },
   {
-    path: "/public",
+    path: "/:id",
     component: Draw,
-    exact: true,
-  },
-  {
-    path: "/private/:id",
-    component: Draw,
-    exact: false,
   },
 ]
 

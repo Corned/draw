@@ -8,13 +8,13 @@ class Canvas extends React.Component {
     super(props)
 
     this.state = {
+      loading: true,
+      error: null,
       drawing: false,
       lastPoint: { x: null, y: null },
       clear: false,
-      socket: io(`/${this.props.id}`),
+      socket: io("/canvas"),
     }
-
-    console.log(`/${this.props.id || "public"}`)
   }
   
   clear = (event) => {
@@ -28,15 +28,32 @@ class Canvas extends React.Component {
   }
 
   componentDidMount() {
+    const socket = this.state.socket
     const canvas = this.refs.canvas
     const ctx = canvas.getContext("2d")
 
-    const socket = this.state.socket
+    socket.on("connect", () => {
+      console.log(`Socket connected | ${this.props.id}`)
+      socket.emit("room-join", this.props.id)
+    })
+
+    socket.on("success", (data) => {
+      console.log(`SUCCESS: ${data}`)
+      this.setState({ loading: false })
+    })
+
+    socket.on("err", (data) => {
+      console.log(`ERROR: ${data}`)
+
+      this.setState({ error: data })
+    })
 
     socket.on("replication", (dataUrl, x) => {
       const img = new Image()
       img.onload = () => ctx.drawImage(img, 0, 0)
       img.src = dataUrl
+
+      this.setState({ loading: false })
     })
 
     socket.on("draw", (data) => {
@@ -133,13 +150,19 @@ class Canvas extends React.Component {
   }
 
   render() {
+    const { loading, error } = this.state
+
     return (
-      <canvas
-        className="frame"
-        width="750"
-        height="500"
-        ref="canvas"
-      />
+      <>
+        <p>ERROR: {error}</p>
+        <p>LOADING: {""+loading}</p>
+        <canvas
+          className="frame"
+          width="750"
+          height="500"
+          ref="canvas"
+        />
+      </>
     )
   }
 }

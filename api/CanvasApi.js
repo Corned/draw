@@ -2,9 +2,6 @@ const express = require("express")
 const router = express.Router()
 const { createCanvas } = require("canvas")
 
-const Room = require("./Room")
-
-
 const canvases = { }
 
 const setupRouter = (io) => {
@@ -12,7 +9,11 @@ const setupRouter = (io) => {
     res.send("Yeehaw!")
   })
 
-  router.get("/create/", (req, res) => {
+  router.get("/h", (req, res) => {
+
+  })
+
+  router.get("/create/sda", (req, res) => {
     // Create a room and put it in memory
     const id = Math.random().toString(36).substring(2, 8).toUpperCase()
     let nsp = io.of(`/${id}`)
