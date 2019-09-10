@@ -12,12 +12,6 @@ class Canvas extends React.Component {
       socket: props.socket,
     }
   }
-  
-  clear = (event) => {
-    const canvas = this.refs.canvas
-    const ctx = canvas.getContext("2d")
-    ctx.clearRect(0, 0, 720, 720)
-  }
 
   componentDidMount() {
     const socket = this.state.socket

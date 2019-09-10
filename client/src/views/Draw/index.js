@@ -30,7 +30,7 @@ const DrawingTool = ({ match }) => {
 
     socket.on("room-joined-success", (message) => {
       console.log(`SUCCESS: ${message}`)
-      setTimeout(() => setLoading(false), 1500)
+      setTimeout(() => setLoading(false), 1000)
     })
 
     socket.on("room-joined-error", (message) => {
@@ -59,11 +59,25 @@ const DrawingTool = ({ match }) => {
   if (loading) {
     return <h1 className="header--giant animation-fadein">joining room "{roomId}"</h1>
   }
+
+  const copy = () => {
+    navigator.permissions.query({name: "clipboard-write"}).then(result => {
+      if (result.state == "granted" || result.state == "prompt") {
+        /* write to the clipboard now */
+        console.log("PERMISSION")
+        navigator.clipboard.writeText(`${window.location.hostname}/${roomId}`).then(function() {
+          /* clipboard successfully set */
+        }, function() {
+          /* clipboard write failed */
+        });
+      }
+    });
+  }
   
   return (
     <div className="drawing-tool animation-fadein">
-      <p style={{ marginBottom: "3px" }}>
-        ID: <b>{roomId}</b>
+      <p onClick={copy} style={{ marginBottom: "3px" }}>
+        {window.location.hostname}/{roomId}
       </p>
       
       <Canvas 
