@@ -60,14 +60,10 @@ const DrawingTool = ({ match }) => {
     return <h1 className="header--giant animation-fadein">joining room "{roomId}"</h1>
   }
 
-  const copy = () => {
-    navigator.clipboard.writeText(window.location.href)
-  }
-  
   return (
     <div className="drawing-tool animation-fadein">
-      <p onClick={copy} style={{ marginBottom: "3px" }}>
-        {window.location.href}
+      <p style={{ marginBottom: "3px" }}>
+        Invite friends: <span style={{userSelect: "text"}}>{window.location.href}</span>
       </p>
       
       <Canvas 
