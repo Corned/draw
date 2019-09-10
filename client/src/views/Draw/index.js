@@ -61,23 +61,13 @@ const DrawingTool = ({ match }) => {
   }
 
   const copy = () => {
-    navigator.permissions.query({name: "clipboard-write"}).then(result => {
-      if (result.state == "granted" || result.state == "prompt") {
-        /* write to the clipboard now */
-        console.log("PERMISSION")
-        navigator.clipboard.writeText(`${window.location.hostname}/${roomId}`).then(function() {
-          /* clipboard successfully set */
-        }, function() {
-          /* clipboard write failed */
-        });
-      }
-    });
+    navigator.clipboard.writeText(window.location.href)
   }
   
   return (
     <div className="drawing-tool animation-fadein">
       <p onClick={copy} style={{ marginBottom: "3px" }}>
-        {window.location.hostname}/{roomId}
+        {window.location.href}
       </p>
       
       <Canvas 
