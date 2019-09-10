@@ -21,7 +21,7 @@ const Home = () => {
   }
 
   return (
-    <div className="home">
+    <div className="home animation-fadein">
       <h1 className="header--giant">Welcome to draw.owo!</h1>
       <div className="buttons">
         <button onClick={joinPublic}>join the public room</button>

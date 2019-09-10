@@ -1,0 +1,19 @@
+.animation-fadein {
+  position: relative;
+  animation-name: fadein;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+  animation-delay: 0.2s;
+}
+
+@keyframes fadein {
+  from {
+    top: -20px;
+    opacity: 0;
+  }
+  to {
+    top: 0px;
+    opacity: 1;
+  }
+}

@@ -6,11 +6,12 @@ import Header from "common/components/Header"
 import Routes from "constants/Routes"
 
 import "./index.scss"
+import "./animations.scss"
 
 const App = () => {
   return (
     <Router>
-      <div className="app">
+      <div pose="open" className="app">
         <Header/>
         <div className="view-container">
           { Routes }

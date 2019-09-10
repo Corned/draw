@@ -30,7 +30,7 @@ const DrawingTool = ({ match }) => {
 
     socket.on("room-joined-success", (message) => {
       console.log(`SUCCESS: ${message}`)
-      setLoading(false)
+      setTimeout(() => setLoading(false), 1500)
     })
 
     socket.on("room-joined-error", (message) => {
@@ -57,11 +57,11 @@ const DrawingTool = ({ match }) => {
   }
 
   if (loading) {
-    return <h1 className="header--giant">joining room "{roomId}"</h1>
+    return <h1 className="header--giant animation-fadein">joining room "{roomId}"</h1>
   }
   
   return (
-    <div className="drawing-tool">
+    <div className="drawing-tool animation-fadein">
       <p style={{ marginBottom: "3px" }}>
         ID: <b>{roomId}</b>
       </p>
