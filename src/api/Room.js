@@ -38,7 +38,6 @@ const onConnection = (socket) => {
     console.log(room.users)
 
     if (room.users.length === 0) {
-      console.log("DESTROY ROOM")
       roomHandler.destroyRoom(roomId)
     }
   }

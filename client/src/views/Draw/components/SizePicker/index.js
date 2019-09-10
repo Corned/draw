@@ -34,6 +34,7 @@ const SizePicker = ({ size: currentSize, setSize }) => {
 
             return (
               <SizeGridOption 
+                key={size}
                 className={classes}
                 onClick={() => setSize(size)}
               >

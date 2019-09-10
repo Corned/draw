@@ -8,7 +8,8 @@ import SizePicker from "./components/SizePicker"
 import "./index.scss"
 
 const DrawingTool = ({ match }) => {
-  const [ roomId, setRoomId ] = useState(null)
+   // Probably no need for useState for roomId
+  const [ roomId ] = useState(match.params.id)
   const [ error, setError ] = useState(null)
   const [ loading, setLoading ] = useState(true)
   const [ socket, setSocket ] = useState(null)
@@ -18,7 +19,6 @@ const DrawingTool = ({ match }) => {
   
   useEffect(() => {
     if (!socket) {
-      setRoomId( match.params.id )
       setSocket( io("/canvas") )
       return
     }
@@ -50,7 +50,7 @@ const DrawingTool = ({ match }) => {
       console.log(`CLEANUP! Leaving room ${roomId}`)
       socket.emit("room-leave", roomId)
     }
-  }, [ socket ])
+  }, [ roomId, socket ])
 
   if (error) {
     return <p className="error">{error}</p>

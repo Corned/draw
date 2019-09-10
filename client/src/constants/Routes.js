@@ -6,11 +6,13 @@ import Draw from "views/Draw"
 
 const routeData = [
   {
+    key: "home",
     path: "/",
     component: Home,
     exact: true,
   },
   {
+    key: "canvas",
     path: "/:id",
     component: Draw,
   },

@@ -106,8 +106,8 @@ button {
   flex-direction: column;
   flex-grow: 2;
   justify-content: center;
-}
 
-.view-container > * {
-  margin: -80px auto 0 auto;
+  & > * {
+    margin: -80px auto 0 auto;
+  }
 }

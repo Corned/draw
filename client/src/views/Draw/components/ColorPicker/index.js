@@ -28,7 +28,7 @@ const getContrastYIQ = (hexColor) => {
   return (yiq >= 156) ? "#000000" : "#ffffff";
 }
 
-const NewColorPicker = ({ color: currentColor, setColor }) => {
+const ColorPicker = ({ color: currentColor, setColor }) => {
   const textColor = getContrastYIQ(currentColor)
 
   return (
@@ -45,7 +45,8 @@ const NewColorPicker = ({ color: currentColor, setColor }) => {
       
       <div className="color-grid">
         { colors.map((color) => (
-            <ColorGridOption 
+            <ColorGridOption
+              key={color}
               className="color-grid__option" 
               style={{ backgroundColor: color }}
               onClick={() => setColor(color)}
@@ -57,4 +58,4 @@ const NewColorPicker = ({ color: currentColor, setColor }) => {
   )
 }
 
-export default NewColorPicker
+export default ColorPicker

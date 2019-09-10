@@ -11,10 +11,7 @@ class RoomHandler {
     return room
   }
 
-  destroyRoom(id) {
-    const roomFilter = (roomId) => roomId !== id
-    const l = this.rooms.length
-    
+  destroyRoom(id) {    
     for (let index in this.rooms) {
       if (this.rooms[index].id === id) {
         return this.rooms.splice(index, 1)
