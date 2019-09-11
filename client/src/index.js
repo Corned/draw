@@ -12,7 +12,7 @@ const App = () => {
   document.title = "Draw!"
   return (
     <Router>
-      <div pose="open" className="app">
+      <div className="app">
         <Header/>
         <div className="view-container">
           { Routes }

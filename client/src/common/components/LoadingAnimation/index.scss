@@ -1,5 +1,6 @@
 .loading-animation-container {
-  height: 100px;
+  height: 150px;
+  width: 500px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -14,7 +15,7 @@
 
     position: relative;
     animation-name: strech;
-    animation-duration: 2s;
+    animation-duration: 1s;
     animation-timing-function: ease-in-out;
     animation-fill-mode: both;
     animation-iteration-count: infinite;

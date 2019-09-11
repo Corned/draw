@@ -7,7 +7,7 @@ const LoadingAnimation = () => {
   const barData = new Array(barCount).fill(0)
 
   return (
-    <div className="loading-animation-container">
+    <div className="loading-animation-container animation-fadein">
       { 
         barData.map((delay, index) => (
           <div

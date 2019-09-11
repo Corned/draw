@@ -4,6 +4,7 @@ import io from "socket.io-client"
 import Canvas from "./components/Canvas"
 import ColorPicker from "./components/ColorPicker"
 import SizePicker from "./components/SizePicker"
+import LoadingAnimation from "common/components/LoadingAnimation"
 
 import "./index.scss"
 
@@ -57,15 +58,7 @@ const DrawingTool = ({ match }) => {
   }
 
   if (loading) {
-    return (
-      <div>
-        <h1 
-          className="header--giant animation-fadein"
-        >
-          joining room "{roomId}"
-        </h1>
-      </div>
-    )
+    return <LoadingAnimation/>
   }
 
   return (
