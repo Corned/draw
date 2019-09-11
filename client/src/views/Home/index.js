@@ -7,9 +7,7 @@ const Home = () => {
   const [ redirectId, setRedirectId ] = useState(null)
 
   const createPrivate = () => {
-  }
-
-  const joinPrivate = () => {
+    
   }
 
   const joinPublic = () => {
@@ -26,7 +24,6 @@ const Home = () => {
       <div className="buttons">
         <button onClick={joinPublic}>join the public room</button>
         <button onClick={createPrivate} disabled>create a private room</button>
-        <button onClick={joinPrivate} disabled>join a private room</button>
       </div>
     </div>
   )

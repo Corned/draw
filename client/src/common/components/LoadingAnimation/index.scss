@@ -1,0 +1,36 @@
+.loading-animation-container {
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin: 40px auto;
+
+  & > .loading-animation-container__bar {
+    height: 20px;
+    width: 3px;
+    border-radius: 2px;
+    background-color: black;
+
+    position: relative;
+    animation-name: strech;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+  }
+}
+
+@keyframes strech {
+  0% {
+    height: 20px;
+  }
+
+  50% {
+    height: 100%;
+  }
+
+  100% {
+    height: 20px;
+  }
+}

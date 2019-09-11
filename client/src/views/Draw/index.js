@@ -57,7 +57,15 @@ const DrawingTool = ({ match }) => {
   }
 
   if (loading) {
-    return <h1 className="header--giant animation-fadein">joining room "{roomId}"</h1>
+    return (
+      <div>
+        <h1 
+          className="header--giant animation-fadein"
+        >
+          joining room "{roomId}"
+        </h1>
+      </div>
+    )
   }
 
   return (

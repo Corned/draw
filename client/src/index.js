@@ -9,6 +9,7 @@ import "./index.scss"
 import "./animations.scss"
 
 const App = () => {
+  document.title = "Draw!"
   return (
     <Router>
       <div pose="open" className="app">
