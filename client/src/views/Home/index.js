@@ -7,7 +7,9 @@ const Home = () => {
   const [ redirectId, setRedirectId ] = useState(null)
 
   const createPrivate = () => {
-    
+    // TODO: Server side
+    const id = Math.random().toString(32).substring(2, 8).toUpperCase()
+    setRedirectId(id)
   }
 
   const joinPublic = () => {
@@ -23,7 +25,7 @@ const Home = () => {
       <h1 className="header--giant">Welcome to draw.owo!</h1>
       <div className="buttons">
         <button onClick={joinPublic}>join the public room</button>
-        <button onClick={createPrivate} disabled>create a private room</button>
+        <button onClick={createPrivate}>create a private room</button>
       </div>
     </div>
   )

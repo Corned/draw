@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon --ignore client/ index.js",
+    "start": "node server",
+    "dev": "nodemon --ignore client/ server",
     "heroku-postbuild": "bash ./util/buildReactApp.sh"
   },
   "author": "",
