@@ -8,7 +8,7 @@ const io = socketio(server)
 
 const RoomApi = require("./api/Room")(io)
 
-app.use("/room", RoomApi)
+app.use("/api/room", RoomApi)
 app.use(express.static(path.join(__dirname, "../build")))
 
 app.get("*", (req, res) => {

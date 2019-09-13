@@ -7,9 +7,9 @@ const Home = () => {
   const [ redirectId, setRedirectId ] = useState(null)
 
   const createPrivate = () => {
-    // TODO: Server side
-    const id = Math.random().toString(32).substring(2, 8).toUpperCase()
-    setRedirectId(id)
+    fetch("/api/room/create")
+      .then((response) => response.json())
+      .then(({ id }) => setRedirectId(id))
   }
 
   const joinPublic = () => {
