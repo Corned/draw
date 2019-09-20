@@ -9,6 +9,15 @@ router.get("/", async (req, res) => {
   res.json(users.map(user => user.toJSON()))
 })
 
+router.get("/:id", async (req, res) => {
+  const { id } = req.params
+  const user = await User.findById(id)
+
+  console.log(id , "HWAT")
+  console.log(user.toJSON())
+  res.json(user.toJSON())
+})
+
 router.post("/create", async (req, res) => {
 
 })

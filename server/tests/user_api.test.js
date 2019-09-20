@@ -29,7 +29,7 @@ describe("/api/user", async () => {
 
   describe("viewing a specific user", () => {
     test("succeeds with a valid id", async () => {
-      const users = helper.usersInDb()
+      const users = await helper.usersInDb()
       const userToView = users[0]
 
       const results = await api
@@ -40,7 +40,7 @@ describe("/api/user", async () => {
       expect(results.body).toEqual(userToView)
     })
 
-    test("fails with an nonexistant id", async () => {
+    test("fails with an invalid id", async () => {
       const invalidId = "x.x.x.x"
       
       await api
