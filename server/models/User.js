@@ -12,9 +12,6 @@ const userSchema = new Schema({
   },
   authKey: {
     type: String,
-    minlength: 20,
-    maxlength: 20,
-    required: false,
   },
   rooms: [
     {

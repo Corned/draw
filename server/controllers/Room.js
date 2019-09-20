@@ -1,9 +1,10 @@
 const express = require("express")
 const router = express.Router()
 
-const RoomHandler = require("../src/classes/RoomHandler")
+const RoomHandler = require("../classes/RoomHandler")
 const roomHandler = new RoomHandler()
 
+// doesnt actually generate uid
 const generateUniqueID = () => {
   let id
 

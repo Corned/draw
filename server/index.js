@@ -1,10 +1,10 @@
-const app = require("./src/app")
+const app = require("./app")
 const socketio = require("socket.io")
 const server = require("http").Server(app)
 
-const RoomHandler = require("./src/classes/RoomHandler")
+const RoomHandler = require("./classes/RoomHandler")
 const roomHandler = new RoomHandler()
-const onConnection = require("./src/SocketFunctions.js")
+const onConnection = require("./SocketFunctions.js")
 
 const io = socketio(server)
 io.of("/canvas").on("connection", onConnection(roomHandler))

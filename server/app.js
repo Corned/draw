@@ -4,9 +4,9 @@ const mongoose = require("mongoose")
 
 const app = express()
 
-const config = require("../util/config")
-const roomRouter = require("../controllers/room")
-//const userRouter = require("../controllers/user")
+const config = require("./util/config")
+const roomRouter = require("./controllers/room")
+const userRouter = require("./controllers/user")
 
 mongoose.connect(config.DB_URL, { useUnifiedTopology: true, useNewUrlParser: true })
   .then(() => {
@@ -17,6 +17,7 @@ mongoose.connect(config.DB_URL, { useUnifiedTopology: true, useNewUrlParser: tru
   })
 
 app.use("/api/room", roomRouter)
+app.use("/api/user", userRouter)
 app.use(express.static(path.join(__dirname, "../build")))
 
 app.get("*", (req, res) => {
