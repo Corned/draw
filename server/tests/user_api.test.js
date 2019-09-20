@@ -10,7 +10,7 @@ describe("/api/user", async () => {
     await User.deleteMany({})
 
     const userObjects = helper.initialUsers
-      .map(user => new User(user))
+      .map((user) => new User(user))
 
     const promiseArray = userObjects.map(user => user.save())
     await Promise.all(promiseArray)
