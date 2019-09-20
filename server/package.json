@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
-    "dev": "cross-env NODE_ENV=development nodemon --ignore client/ index.js",
-    "heroku-postbuild": "bash ./buildReactApp.sh"
+    "watch": "cross-env NODE_ENV=development nodemon --ignore client/ index.js"
   },
   "author": "",
   "license": "ISC",

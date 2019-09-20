@@ -1,0 +1,26 @@
+{
+  "name": "draw",
+  "version": "1.0.0",
+  "description": "A simple collaborative drawing application with public and private rooms.",
+  "scripts": {
+    "start": "cd server/ && npm start",
+    "build": "bash buildReactApp.sh",
+
+    "postinstall": "npm run postinstall.client && npm run postinstall.server",
+    "postinstall.client": "npm run build",
+    "postinstall.server": "cd server/ && npm install",
+
+    "dev.client": "cd client/ && npm start",
+    "dev.server": "cd server/ && npm run watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Corned/owo-draw.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Corned/owao-draw/issues"
+  },
+  "homepage": "https://github.com/Corned/owo-draw#readme"
+}
