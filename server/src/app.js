@@ -2,7 +2,7 @@ const express = require("express")
 const app = express()
 const path = require("path")
 
-const RoomApi = require("../controllers/Room")
+const RoomApi = require("../controllers/room")
 
 app.use("/api/room", RoomApi)
 app.use(express.static(path.join(__dirname, "../build")))

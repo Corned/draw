@@ -3,18 +3,11 @@ const app = require("./app")
 
 const api = supertest(app)
 
-
-test("/ serves the React app", async () => {
-  await api
-    .get("/")
-    .expect(200)
-    .expect("Content-Type", "text/html; charset=UTF-8")
-})
+const Room = require("../models/room")
 
 describe("/api/room", () => {
   beforeEach(() => {
     // Create rooms in the database
-    // databases and room model not yet implemented
   })
 
   test("GET / returns all rooms as JSON", async () => {
@@ -29,6 +22,10 @@ describe("/api/room", () => {
 
   describe("viewing a specific room", () => {
     test("succeeds with a valid id", () => {
+      
+    })
+
+    test("fails with an invalid id", () => {
       
     })
   })
