@@ -1,18 +1,20 @@
 const supertest = require("supertest")
-const app = require("./app")
+const app = require("../app")
 const helper = require("./test_helper.js")
 
 const api = supertest(app)
 const User = require("../models/user")
 
 describe("/api/user", async () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     await User.deleteMany({})
 
     const userObjects = helper.initialUsers
-      .map((user) => new User(user))
+      .map(user => new User(user))
 
-    const promiseArray = userObjects.map(user => user.save())
+    const promiseArray = userObjects
+      .map(user => user.save())
+
     await Promise.all(promiseArray)
   })
 
@@ -22,12 +24,11 @@ describe("/api/user", async () => {
       .expect(200)
       .expect("Content-Type", /application\/json/)
 
-  // testhelper.users.length perhaps
-    expect(results.length).toBe(5) 
+    expect(results.body.length).toBe(helper.initialUsers.length) 
   })
 
   describe("viewing a specific user", () => {
-    test("succeeds with a valid id", () => {
+    test("succeeds with a valid id", async () => {
       const users = helper.usersInDb()
       const userToView = users[0]
 
@@ -39,7 +40,7 @@ describe("/api/user", async () => {
       expect(results.body).toEqual(userToView)
     })
 
-    test("fails with an nonexistant id", () => {
+    test("fails with an nonexistant id", async () => {
       const invalidId = "x.x.x.x"
       
       await api
