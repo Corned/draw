@@ -1,8 +1,4 @@
-
-
 module.exports = (roomHandler) => {
-  console.log(roomHandler)
-
   const onConnection = (socket) => {
     socket.on("room-join", (roomId) => {
       if (!roomHandler.getRoomById(roomId)) {

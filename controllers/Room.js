@@ -1,10 +1,8 @@
 const express = require("express")
 const router = express.Router()
 
-const RoomHandler = require("../classes/RoomHandler")
+const RoomHandler = require("../src/classes/RoomHandler")
 const roomHandler = new RoomHandler()
-
-const onConnection = require("../SocketFunctions")
 
 const generateUniqueID = () => {
   let id
@@ -16,22 +14,10 @@ const generateUniqueID = () => {
   return id
 }
 
-router.get("/", (req, res) => {
-res.status(200).json({ x: "what" })
-})
-
 router.get("/create", (req, res) => {
   const id = generateUniqueID()
-
-  console.log(id)
-
   res.status(200).json({ id })
 })
 
 
-module.exports = (io) => {
-
-  io.of("/canvas").on("connection", onConnection(roomHandler))
-
-  return router
-}
+module.exports = router
