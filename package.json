@@ -4,10 +4,9 @@
   "description": "A simple collaborative drawing application with public and private rooms.",
   "scripts": {
     "start": "cd server/ && npm start",
-    "build": "bash buildReactApp.sh",
 
     "postinstall": "npm run postinstall.client && npm run postinstall.server",
-    "postinstall.client": "npm run build",
+    "postinstall.client": "bash buildReactApp.sh",
     "postinstall.server": "cd server/ && npm install",
 
     "dev.client": "cd client/ && npm start",
