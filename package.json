@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server",
     "dev": "nodemon --ignore client/ server",
-    "heroku-postbuild": "bash ./util/buildReactApp.sh"
+    "heroku-postbuild": "bash ./buildReactApp.sh"
   },
   "author": "",
   "license": "ISC",
