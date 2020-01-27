@@ -1,4 +1,4 @@
-# draw.owo
+# draw
 
 A simple collaborative drawing application with public and private rooms.
 
