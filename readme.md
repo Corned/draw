@@ -11,7 +11,7 @@ A simple collaborative drawing application with public and private rooms.
 
 ## Testing
 
-[here](http://draw.owo.fi/)
+[here](http://drawmyowo.herokuapp.com/)
 
 ## Pictures
 
